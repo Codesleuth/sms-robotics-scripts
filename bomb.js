@@ -10,6 +10,7 @@ pc.script.create('bomb', function (app) {
     initialize: function () {
       this.bombs = app.root.getChildren()[0].script.bombs;
       this.players = app.root.getChildren()[0].script.players;
+      this.model = this.entity.findByName('Model');
 
       this._playerId = null;
       this._timer = null;
@@ -32,7 +33,7 @@ pc.script.create('bomb', function (app) {
       if (this._timer === null) return;
 
       var scale = 2 - (this._timer / this._timerMax);
-      this.entity.setLocalScale(scale, scale, scale);
+      this.model.setLocalScale(scale, scale, scale);
 
       this._timer -= dt;
 

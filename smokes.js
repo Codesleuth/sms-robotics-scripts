@@ -19,13 +19,8 @@ pc.script.create('smokes', function (app) {
       var newSmoke = this.smoke.clone();
       newSmoke.enabled = true;
       newSmoke.setPosition(position);
-      
-      var smokeObj = newSmoke.script.smoke;
-      smokeObj.setPlayer(player);
 
       this.smokesNode.addChild(newSmoke);
-
-      return smokeObj;
     },
     
     delete: function (smokeNode) {

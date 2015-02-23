@@ -153,11 +153,13 @@ pc.script.create('player', function (app) {
     },
 
     bomb: function () {
+      if (this._dead) return;
       var bomb = this.bombs.plant(this, this.entity.getPosition());
       bomb.countDown(this.bombtimer);
     },
 
     die: function () {
+      if (this._dead) return;
       this.stop();
       this._dead = true;
       this.queuedMove = null;

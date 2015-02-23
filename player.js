@@ -6,6 +6,12 @@ pc.script.create('player', function (app) {
     "run": "Playbot_run",
     "die": "Playbot_die"
   };
+
+  var DOLLIES = ["box", "capsule", "cone", "cylinder", "sphere"];
+
+  function randomDolly() {
+    return DOLLIES[Math.floor(pc.math.random(0, DOLLIES.length))];
+  }
   
   var Player = function (entity) {
     this.entity = entity;
@@ -24,6 +30,8 @@ pc.script.create('player', function (app) {
       
       this._name = null;
       this._dead = false;
+
+      this.dolly.model.type = randomDolly();
     
       this.stop();
     },

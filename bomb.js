@@ -49,7 +49,8 @@ pc.script.create('bomb', function (app) {
       var playersHit = this.players.within(currentPos, this.radius);
       this.bombs.delete(this._player.getId());
 
-      this.smokes.new(currentPos);
+      var smoke = this.smokes.new(currentPos);
+      smoke.countDown(5);
 
       for (var i = 0; i < playersHit.length; i++) {
         var player = playersHit[i];

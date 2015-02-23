@@ -21,6 +21,8 @@ pc.script.create('smokes', function (app) {
       newSmoke.setPosition(position);
 
       this.smokesNode.addChild(newSmoke);
+
+      return newSmoke.script.smoke;
     },
     
     delete: function (smokeNode) {

@@ -27,6 +27,8 @@ pc.script.create('bombs', function (app) {
       bombObj.setPlayerId(playerId);
 
       this.bombsNode.addChild(newBomb);
+
+      return bombObj;
     },
     
     _remove: function (bombNode) {

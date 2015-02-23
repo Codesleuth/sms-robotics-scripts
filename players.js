@@ -25,8 +25,8 @@ pc.script.create('players', function (app) {
       newPlayer.setName('Player_' + args.id);
       newPlayer.enabled = true;
 
-      var x = Math.floor(pc.math.random(-10, 10));
-      var z = Math.floor(pc.math.random(-10, 10));
+      var x = Math.floor(pc.math.random(-9, 9));
+      var z = Math.floor(pc.math.random(-9, 9));
 
       newPlayer.setPosition(x, 0, z);
       

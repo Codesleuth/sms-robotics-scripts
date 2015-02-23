@@ -3,7 +3,8 @@ pc.script.attribute('bombtimer', 'number', 5);
 pc.script.create('player', function (app) {
   var ANIMATIONS = {
     "idle": "Playbot_idle",
-    "run": "Playbot_run"
+    "run": "Playbot_run",
+    "die": "Playbot_die"
   };
   
   var Player = function (entity) {
@@ -22,6 +23,7 @@ pc.script.create('player', function (app) {
       this.dolly = this.entity.findByName("Dolly");
       
       this._name = null;
+      this._dead = false;
     
       this.stop();
     },
@@ -51,6 +53,10 @@ pc.script.create('player', function (app) {
     
     setId: function (id) {
       this._id = id;
+    },
+
+    isDead: function () {
+      return this._dead;
     },
 
     update: function (dt) {
@@ -117,18 +123,22 @@ pc.script.create('player', function (app) {
     },
     
     moveRight: function () {
+      if (this._dead) return;
       this.moveOrQueue(pc.Vec3.RIGHT, 90);
     },
     
     moveLeft: function () {
+      if (this._dead) return;
       this.moveOrQueue(pc.Vec3.LEFT, -90);
     },
     
     moveUp: function () {
+      if (this._dead) return;
       this.moveOrQueue(pc.Vec3.FORWARD, 180);
     },
     
     moveDown: function () {
+      if (this._dead) return;
       this.moveOrQueue(pc.Vec3.BACK, 0);
     },
     
@@ -144,6 +154,21 @@ pc.script.create('player', function (app) {
     bomb: function () {
       var bomb = this.bombs.plant(this, this.entity.getPosition());
       bomb.countDown(this.bombtimer);
+    },
+
+    die: function () {
+      this.model.animation.play(ANIMATIONS.die, 0.2);
+      this.queuedMove = null;
+      this._dead = true;
+    },
+
+    revive: function () {
+      this.model.animation.play(ANIMATIONS.idle, 0);
+      this._dead = false;
+
+      var x = Math.floor(pc.math.random(-9, 9));
+      var z = Math.floor(pc.math.random(-9, 9));
+      this.teleport(x, 0, z);
     }
   };
 

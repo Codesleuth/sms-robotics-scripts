@@ -26,6 +26,7 @@ pc.script.create('client', function (app) {
       players.on('player_move_up', this.onPlayerMove.bind(this, "up", "moveUp"));
       players.on('player_move_down', this.onPlayerMove.bind(this, "down", "moveDown"));
       players.on('player_bomb', this.onPlayerBomb.bind(this));
+      players.on('player_revive', this.onPlayerRevive.bind(this));
       
       players.on('sync_response', this.onSyncResponse.bind(this));
     },
@@ -75,6 +76,17 @@ pc.script.create('client', function (app) {
       
       console.log(player.getName() + " (" + id + ") planting bomb.");
       player.bomb();
+    },
+    
+    onPlayerRevive: function (id) {
+      var player = this.players.findById(id);
+      if (player === null) {
+        console.log("Player " + id + " not found; could not revive.");
+        return;
+      }
+      
+      console.log(player.getName() + " (" + id + ") reviving.");
+      player.revive();
     },
     
     onSyncResponse: function (syncdata) {

@@ -37,6 +37,7 @@ pc.script.create('bomb', function (app) {
       this._timer -= dt;
 
       if (this._timer <= 0) {
+        this._timer = null;
         this.explode();
       }
     },

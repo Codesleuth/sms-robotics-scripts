@@ -142,8 +142,7 @@ pc.script.create('player', function (app) {
     },
 
     bomb: function () {
-      var currentPos = this.entity.getPosition();
-      var bomb = this.bombs.plant(this._id, currentPos);
+      var bomb = this.bombs.plant(this);
       bomb.countDown(this.bombtimer);
     }
   };

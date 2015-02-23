@@ -15,16 +15,16 @@ pc.script.create('bombs', function (app) {
       this.bombsNode = app.root.findByName('Bombs');
     },
     
-    plant: function(playerId, position) {
+    plant: function(playerObj) {
+      var playerPos = playerObj.getPosition();
+
       var newBomb = this.bomb.clone();
-      newBomb.setName('Bomb_' + playerId);
+      newBomb.setName('Bomb_' + playerObj.getId());
       newBomb.enabled = true;
-      newBomb.setPosition(position.x, 
-                          position.y,
-                          position.z);
+      newBomb.setPosition(playerPos);
       
       var bombObj = newBomb.script.bomb;
-      bombObj.setPlayerId(playerId);
+      bombObj.setPlayer(player);
 
       this.bombsNode.addChild(newBomb);
 
@@ -34,7 +34,7 @@ pc.script.create('bombs', function (app) {
     _remove: function (bombNode) {
       var bombObj = bombNode.script.bomb;
       var result = {
-        playerId: bombObj.getPlayerId()
+        playerId: bombObj.getPlayer().getId()
       };
       
       bombNode.destroy();
@@ -44,17 +44,17 @@ pc.script.create('bombs', function (app) {
     
     delete: function(playerId) {
       var bomb = this.bombsNode.findByName('Bomb_' + playerId);
-      if (!bomb) return;
+      if (!bomb) return null;
       
       var result = this._remove(bomb);
       return result;
     },
     
     findByPlayerId: function (playerId) {
-      var player = this.playersNode.findByName('Bomb_' + playerId);
-      if (!player) return null;
+      var bomb = this.playersNode.findByName('Bomb_' + playerId);
+      if (!bomb) return null;
       
-      return player.script.player;
+      return bomb.script.bomb;
     }
   };
 

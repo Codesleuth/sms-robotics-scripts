@@ -61,7 +61,7 @@ pc.script.create('players', function (app) {
     
     delete: function (id) {
       var player = this.playersNode.findByName('Player_' + id);
-      if (!player) return;
+      if (!player) return null;
       
       var result = this._remove(player);
       return result;

@@ -158,20 +158,22 @@ pc.script.create('player', function (app) {
     },
 
     die: function () {
+      this.stop();
+      this._dead = true;
+      this.queuedMove = null;
       this.model.animation.loop = false;
       this.model.animation.play(ANIMATIONS.die, 0.2);
-      this.queuedMove = null;
-      this._dead = true;
     },
 
     revive: function () {
       this.model.animation.loop = true;
       this.model.animation.play(ANIMATIONS.idle, 0);
-      this._dead = false;
 
       var x = Math.floor(pc.math.random(-9, 9));
       var z = Math.floor(pc.math.random(-9, 9));
       this.teleport(x, 0, z);
+
+      this._dead = false;
     }
   };
 

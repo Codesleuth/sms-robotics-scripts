@@ -81,7 +81,7 @@ pc.script.create('players', function (app) {
         var playerNode = playerNodes[i];;
         var playerPos = playerNode.getPosition();
 
-        var vec = position.clone().sub(playerNode);
+        var vec = position.clone().sub(playerPos);
 
         if (vec.length() <= radius) {
           var playerObj = playerNode.script.player;

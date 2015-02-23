@@ -76,6 +76,7 @@ pc.script.create('players', function (app) {
 
     within: function (position, radius) {
       var result = [];
+      var playerNodes = this.playersNode.getChildren();
       for (i = 0; i < playerNodes.length; i++) {
         var playerNode = playerNodes[i];;
         var playerPos = playerNode.getPosition();

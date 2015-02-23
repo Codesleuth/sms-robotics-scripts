@@ -20,7 +20,7 @@ pc.script.create('smoke', function (app) {
 
       this._timer -= dt;
 
-      var moveDistance = (this._timer / this._timerMax) * 10 - 10;
+      var moveDistance = (this._timer / this._timerMax) * 12 - 10;
 
       var pos = this.entity.getPosition();
       this.entity.setPosition(pos.x, moveDistance, pos.z);

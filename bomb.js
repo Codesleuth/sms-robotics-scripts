@@ -54,7 +54,7 @@ pc.script.create('bomb', function (app) {
 
       for (var i = 0; i < playersHit.length; i++) {
         var player = playersHit[i];
-        console.log(player.getName() + ' hit by player ' + this._player + '!');
+        console.log(player + ' hit by player ' + this._player + '!');
 
         player.die();
       }

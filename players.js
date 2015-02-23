@@ -45,6 +45,8 @@ pc.script.create('players', function (app) {
       };
       
       this.playersNode.addChild(newPlayer);
+
+      return playerObj;
     },
     
     _remove: function (playerNode) {

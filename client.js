@@ -43,17 +43,17 @@ pc.script.create('client', function (app) {
     },
     
     onPlayerJoined: function (player) {
-      this.players.new({
+      var newPlayer = this.players.new({
         name: player.name,
         id: player.id,
       });
-      console.log(player.name + " (" + player.id + ") joined.");
+      console.log(newPlayer + " joined.");
     },
     
     onPlayerLeft: function (id) {
       var player = this.players.delete(id);
       if (player)
-        console.log(player.name + " (" + player.id + ") left.");
+        console.log(player + " left.");
     },
     
     onPlayerMove: function (direction, func, id) {
@@ -63,7 +63,7 @@ pc.script.create('client', function (app) {
         return;
       }
       
-      console.log(player.getName() + " (" + id + ") moving " + direction + ".");
+      console.log(player + " moving " + direction + ".");
       player[func]();
     },
     
@@ -74,7 +74,7 @@ pc.script.create('client', function (app) {
         return;
       }
       
-      console.log(player.getName() + " (" + id + ") planting bomb.");
+      console.log(player + " planting bomb.");
       player.bomb();
     },
     
@@ -85,7 +85,7 @@ pc.script.create('client', function (app) {
         return;
       }
       
-      console.log(player.getName() + " (" + id + ") reviving.");
+      console.log(player + " reviving.");
       player.revive();
     },
     

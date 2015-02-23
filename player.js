@@ -176,6 +176,10 @@ pc.script.create('player', function (app) {
       this.teleport(x, 0, z);
 
       this._dead = false;
+    },
+
+    toString: function () {
+      return this._name + ' (' + this._id + ')';
     }
   };
 

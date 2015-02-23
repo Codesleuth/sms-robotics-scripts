@@ -15,7 +15,7 @@ pc.script.create('smokes', function (app) {
       this.smokesNode = app.root.findByName('Smokes');
     },
     
-    new: function(position) {
+    new: function (position) {
       var newSmoke = this.smoke.clone();
       newSmoke.enabled = true;
       newSmoke.setPosition(position);
@@ -28,7 +28,7 @@ pc.script.create('smokes', function (app) {
       return smokeObj;
     },
     
-    delete: function(smokeNode) {
+    delete: function (smokeNode) {
       smokeNode.destroy();
     }
   };

@@ -10,6 +10,7 @@ pc.script.create('bomb', function (app) {
     initialize: function () {
       this.bombs = app.root.getChildren()[0].script.bombs;
       this.players = app.root.getChildren()[0].script.players;
+      this.smokes = app.root.getChildren()[0].script.smokes;
       this.model = this.entity.findByName('Model');
 
       this._playerId = null;
@@ -47,6 +48,8 @@ pc.script.create('bomb', function (app) {
       var currentPos = this.entity.getPosition();
       var playersHit = this.players.within(currentPos, this.radius);
       this.bombs.delete(this._player.getId());
+
+      this.smokes.new(currentPos);
 
       for (var i = 0; i < playersHit.length; i++) {
         var player = playersHit[i];

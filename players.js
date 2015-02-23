@@ -88,6 +88,7 @@ pc.script.create('players', function (app) {
           result.push(playerObj);
         }
       }
+      return result;
     },
     
     sync: function (syncdata) {

@@ -45,7 +45,7 @@ pc.script.create('bomb', function (app) {
     explode: function () {
       var currentPos = this.entity.getPosition();
       var playersHit = this.players.within(currentPos, this.radius);
-      this.bombs.delete(this._player);
+      this.bombs.delete(this._player.getId());
 
       for (var i = 0; i < playersHit.length; i++) {
         var player = playersHit[i];

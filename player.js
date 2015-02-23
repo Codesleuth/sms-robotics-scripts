@@ -92,6 +92,7 @@ pc.script.create('player', function (app) {
     },
     
     run: function () {
+      this.model.animation.loop = true;
       this.model.animation.play(ANIMATIONS.run, 0.2);
     },
     
@@ -157,12 +158,14 @@ pc.script.create('player', function (app) {
     },
 
     die: function () {
+      this.model.animation.loop = false;
       this.model.animation.play(ANIMATIONS.die, 0.2);
       this.queuedMove = null;
       this._dead = true;
     },
 
     revive: function () {
+      this.model.animation.loop = true;
       this.model.animation.play(ANIMATIONS.idle, 0);
       this._dead = false;
 

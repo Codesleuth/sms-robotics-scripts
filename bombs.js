@@ -32,7 +32,7 @@ pc.script.create('bombs', function (app) {
     },
     
     _remove: function (bombNode) {
-      var bombObj = bombNode.script.player;
+      var bombObj = bombNode.script.bomb;
       var result = {
         playerId: bombObj.getPlayerId()
       };

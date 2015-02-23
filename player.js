@@ -16,6 +16,7 @@ pc.script.create('player', function (app) {
 
   Player.prototype = {
     initialize: function () {
+      this.bombs = app.root.getChildren()[0].script.bombs;
     
       this.model = this.entity.findByName("Model");
       this.dolly = this.entity.findByName("Dolly");

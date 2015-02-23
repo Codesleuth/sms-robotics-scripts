@@ -1,3 +1,5 @@
+pc.script.attribute('bombtimer', 'number', 5);
+
 pc.script.create('player', function (app) {
   var ANIMATIONS = {
     "idle": "Playbot_idle",
@@ -136,6 +138,12 @@ pc.script.create('player', function (app) {
     teleport: function (x, y, z) {
       this.stop();
       this.entity.setPosition(x, y, z);
+    },
+
+    bomb: function () {
+      var currentPos = this.entity.getPosition();
+      var bomb = this.bombs.plant(this._id, currentPos);
+      bomb.countDown(this.bombtimer);
     }
   };
 

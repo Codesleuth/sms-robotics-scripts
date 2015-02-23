@@ -25,6 +25,7 @@ pc.script.create('client', function (app) {
       players.on('player_move_right', this.onPlayerMove.bind(this, "right", "moveRight"));
       players.on('player_move_up', this.onPlayerMove.bind(this, "up", "moveUp"));
       players.on('player_move_down', this.onPlayerMove.bind(this, "down", "moveDown"));
+      players.on('player_bomb', this.onPlayerBomb.bind(this));
       
       players.on('sync_response', this.onSyncResponse.bind(this));
     },
@@ -63,6 +64,17 @@ pc.script.create('client', function (app) {
       
       console.log(player.getName() + " (" + id + ") moving " + direction + ".");
       player[func]();
+    },
+    
+    onPlayerBomb: function (id) {
+      var player = this.players.findById(id);
+      if (player === null) {
+        console.log("Player " + id + " not found; could not place bomb.");
+        return;
+      }
+      
+      console.log(player.getName() + " (" + id + ") planting bomb.");
+      player.bomb();
     },
     
     onSyncResponse: function (syncdata) {

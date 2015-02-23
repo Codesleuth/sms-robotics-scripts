@@ -20,11 +20,15 @@ pc.script.create('players', function (app) {
         this.onPositionUpdate(id, position);
     },
     
-    new: function(args) {
+    new: function (args) {
       var newPlayer = this.player.clone();
       newPlayer.setName('Player_' + args.id);
       newPlayer.enabled = true;
-      newPlayer.setPosition(0, 0, 0);
+
+      var x = Math.floor(pc.math.random(-10, 10));
+      var z = Math.floor(pc.math.random(-10, 10));
+
+      newPlayer.setPosition(x, 0, z);
       
       var playerObj = newPlayer.script.player;
       playerObj.setName(args.name);
@@ -55,7 +59,7 @@ pc.script.create('players', function (app) {
       return result;
     },
     
-    delete: function(id) {
+    delete: function (id) {
       var player = this.playersNode.findByName('Player_' + id);
       if (!player) return;
       
@@ -69,8 +73,23 @@ pc.script.create('players', function (app) {
       
       return player.script.player;
     },
+
+    within: function (position, radius) {
+      var result = [];
+      for (i = 0; i < playerNodes.length; i++) {
+        var playerNode = playerNodes[i];;
+        var playerPos = playerNode.getPosition();
+
+        var vec = position.clone().sub(playerNode);
+
+        if (vec.length() <= radius) {
+          var playerObj = playerNode.script.player;
+          result.push(playerObj);
+        }
+      }
+    },
     
-    sync: function(syncdata) {
+    sync: function (syncdata) {
       var syncIds = syncdata.map(function (d) { return d.id; });
       var playerNodes = this.playersNode.getChildren();
       

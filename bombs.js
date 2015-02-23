@@ -15,13 +15,11 @@ pc.script.create('bombs', function (app) {
       this.bombsNode = app.root.findByName('Bombs');
     },
     
-    plant: function(playerObj) {
-      var playerPos = playerObj.getPosition();
-
+    plant: function(playerObj, position) {
       var newBomb = this.bomb.clone();
       newBomb.setName('Bomb_' + playerObj.getId());
       newBomb.enabled = true;
-      newBomb.setPosition(playerPos);
+      newBomb.setPosition(position);
       
       var bombObj = newBomb.script.bomb;
       bombObj.setPlayer(player);

@@ -142,7 +142,7 @@ pc.script.create('player', function (app) {
     },
 
     bomb: function () {
-      var bomb = this.bombs.plant(this);
+      var bomb = this.bombs.plant(this, this.entity.getPosition());
       bomb.countDown(this.bombtimer);
     }
   };

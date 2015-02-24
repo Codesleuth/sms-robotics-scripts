@@ -13,7 +13,7 @@ pc.script.create('bomb', function (app) {
       this.smokes = app.root.getChildren()[0].script.smokes;
       this.model = this.entity.findByName('Model');
 
-      this._playerId = null;
+      this._player = null;
       this._timer = null;
     },
     
@@ -45,11 +45,12 @@ pc.script.create('bomb', function (app) {
     },
 
     explode: function () {
-      var currentPos = this.entity.getPosition();
-      this.players.kill(this._playerId, currentPos);
+      var modelPos = this.model.getPosition();
+      var playerId = this._player.getId();
+      this.players.kill(playerId, modelPos);
 
-      this.bombs.delete(this._player.getId());
-      var smoke = this.smokes.new(currentPos);
+      this.bombs.delete(playerId);
+      var smoke = this.smokes.new(modelPos);
       smoke.countDown(5);
     }
   };

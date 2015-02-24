@@ -63,14 +63,9 @@ pc.script.create('players', function (app) {
     
     _remove: function (playerNode) {
       var playerObj = playerNode.script.player;
-      var result = {
-        name: playerObj.getName(),
-        id: playerObj.getId()
-      };
-      
       playerNode.destroy();
       
-      return result;
+      return playerObj;
     },
     
     delete: function (id) {
@@ -96,17 +91,20 @@ pc.script.create('players', function (app) {
         var playerPos = playerNode.getPosition();
 
         var vec = position.clone().sub(playerPos);
+        var distance = vec.length();
+
+        var playerObj = playerNode.script.player;
+        console.log(playerObj + ' was found ' + distance + ' away from explosion.');
 
         if (vec.length() <= radius) {
-          var playerObj = playerNode.script.player;
           result.push(playerObj);
         }
       }
       return result;
     },
 
-    kill: function (playerId, position) {
-      var playersHit = this.within(position, this.radius);
+    explosion: function (playerId, position, radius) {
+      var playersHit = this.within(position, radius);
 
       for (var i = 0; i < playersHit.length; i++) {
         var player = playersHit[i];

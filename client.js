@@ -1,11 +1,15 @@
+pc.script.attribute('serverUrl', 'string', 'http://sms-robotics.herokuapp.com', {
+    displayName: "Server Url"
+});
+
 pc.script.create('client', function (app) {
-  // Creates a new Client instance
+
   var Client = function (entity) {
     this.entity = entity;
   };
 
   Client.prototype = {
-    // Called once after all resources are loaded and before the first update
+
     initialize: function () {
       this.players = app.root.getChildren()[0].script.players;
       this.players.onPositionUpdate = this.sendPositionUpdate.bind(this);
@@ -16,7 +20,7 @@ pc.script.create('client', function (app) {
     },
     
     initializeSocketIo: function () {
-      var players = io('http://sms-robotics.herokuapp.com/players');
+      var players = io(this.serverUrl + '/players');
       this.io = players;
       
       players.on('connect', this.onPlayersConnected.bind(this));

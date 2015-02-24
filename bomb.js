@@ -47,7 +47,7 @@ pc.script.create('bomb', function (app) {
     explode: function () {
       var modelPos = this.model.getPosition();
       var playerId = this._player.getId();
-      this.players.kill(playerId, modelPos);
+      this.players.explosion(playerId, modelPos, this.radius);
 
       this.bombs.delete(playerId);
       var smoke = this.smokes.new(modelPos);

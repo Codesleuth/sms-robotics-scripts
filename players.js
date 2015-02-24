@@ -4,6 +4,8 @@ pc.script.create('players', function (app) {
     this.entity = entity;
     
     this.onPositionUpdate = null;
+    this.onPlayerDeath = null;
+    this.onPlayerKill = null;
   };
 
   Players.prototype = {
@@ -18,6 +20,16 @@ pc.script.create('players', function (app) {
     callPositionUpdate: function (id, position) {
       if (this.onPositionUpdate)
         this.onPositionUpdate(id, position);
+    },
+    
+    callPlayerDeath: function (playerId) {
+      if (this.onPlayerDeath)
+        this.onPlayerDeath(playerId);
+    },
+    
+    callPlayerKill: function (playerId) {
+      if (this.onPlayerKill)
+        this.onPlayerKill(playerId);
     },
     
     new: function (args) {
@@ -91,6 +103,20 @@ pc.script.create('players', function (app) {
         }
       }
       return result;
+    },
+
+    kill: function (playerId, position) {
+      var playersHit = this.within(position, this.radius);
+
+      for (var i = 0; i < playersHit.length; i++) {
+        var player = playersHit[i];
+        console.log(player + ' hit by player ' + this._player + '!');
+
+        player.die();
+        
+        this.callPlayerDeath(player.getId());
+        this.callPlayerKill(playerId);
+      }
     },
     
     sync: function (syncdata) {

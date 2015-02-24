@@ -9,6 +9,8 @@ pc.script.create('client', function (app) {
     initialize: function () {
       this.players = app.root.getChildren()[0].script.players;
       this.players.onPositionUpdate = this.sendPositionUpdate.bind(this);
+      this.players.onPlayerDeath = this.sendPlayerDeath.bind(this);
+      this.players.onPlayerKill = this.sendPlayerKill.bind(this);
       
       this.initializeSocketIo();
     },
@@ -105,6 +107,16 @@ pc.script.create('client', function (app) {
       };
       console.log('Sending position update: ', payload);
       this.io.emit('player_position_update', payload);
+    },
+    
+    sendPlayerKill: function (playerId) {
+      console.log('Sending player kill: ', playerId);
+      this.io.emit('player_kill', playerId);
+    },
+    
+    sendPlayerDeath: function (playerId) {
+      console.log('Sending player death: ', playerId);
+      this.io.emit('player_death', playerId);
     }
   };
 

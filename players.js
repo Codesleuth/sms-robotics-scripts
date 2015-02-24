@@ -1,5 +1,5 @@
 pc.script.create('players', function (app) {
-  // Creates a new Players instance
+
   var Players = function (entity) {
     this.entity = entity;
     
@@ -9,7 +9,7 @@ pc.script.create('players', function (app) {
   };
 
   Players.prototype = {
-    // Called once after all resources are loaded and before the first update
+
     initialize: function () {
       this.player = app.root.findByName('Player');
       this.player.enabled = false;
@@ -96,7 +96,7 @@ pc.script.create('players', function (app) {
         var playerObj = playerNode.script.player;
         console.log(playerObj + ' was found ' + distance + ' away from explosion.');
 
-        if (vec.length() <= radius) {
+        if (vec.length() < radius) {
           result.push(playerObj);
         }
       }
@@ -108,7 +108,7 @@ pc.script.create('players', function (app) {
 
       for (var i = 0; i < playersHit.length; i++) {
         var player = playersHit[i];
-        console.log(player + ' hit by player ' + this._player + '!');
+        console.log(player + ' hit by player id ' + playerId + '!');
 
         player.die();
         
@@ -141,6 +141,11 @@ pc.script.create('players', function (app) {
         player.setName(playerData.name);
         player.setId(playerData.id);
         player.teleport(playerData.position.x, playerData.position.y, playerData.position.z);
+
+        if (playerData.dead)
+          player.die();
+        else
+          player.revive(false);
       }
       
       for (var i = 0; i < nodesToRemove.length; i++) {
@@ -155,11 +160,14 @@ pc.script.create('players', function (app) {
         var newData = syncdata[i];
         if (this.findById(newData.id) !== null) continue;
         
-        this.new({
+        var newPlayer = this.new({
           id: newData.id,
           name: newData.name,
           position: newData.position
         });
+
+        if (newData.dead)
+          newPlayer.die();
       }
     }
   };

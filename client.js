@@ -92,7 +92,7 @@ pc.script.create('client', function (app) {
       }
       
       console.log(player + " reviving.");
-      player.revive();
+      player.revive(true);
     },
     
     onSyncResponse: function (syncdata) {

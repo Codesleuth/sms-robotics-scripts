@@ -1,4 +1,4 @@
-pc.script.attribute('bombtimer', 'number', 5);
+pc.script.attribute('bombtimer', 'number', 8);
 
 pc.script.create('player', function (app) {
   var ANIMATIONS = {
@@ -162,6 +162,7 @@ pc.script.create('player', function (app) {
 
     bomb: function () {
       if (this._dead) return;
+      this.callPositionUpdate();
       var bomb = this.bombs.plant(this, this.entity.getPosition());
       bomb.countDown(this.bombtimer);
     },
@@ -175,13 +176,15 @@ pc.script.create('player', function (app) {
       this.model.animation.play(ANIMATIONS.die, 0.2);
     },
 
-    revive: function () {
+    revive: function (randomisePosition) {
       this.model.animation.loop = true;
       this.model.animation.play(ANIMATIONS.idle, 0);
 
-      var x = Math.floor(pc.math.random(-9, 9));
-      var z = Math.floor(pc.math.random(-9, 9));
-      this.teleport(x, 0, z);
+      if (randomisePosition) {
+        var x = Math.floor(pc.math.random(-9, 9));
+        var z = Math.floor(pc.math.random(-9, 9));
+        this.teleport(x, 0, z);
+      }
 
       this._dead = false;
     },

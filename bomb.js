@@ -33,7 +33,7 @@ pc.script.create('bomb', function (app) {
     update: function (dt) {
       if (this._timer === null) return;
 
-      var scale = 2 - (this._timer / this._timerMax);
+      var scale = 1.5 - (this._timer / this._timerMax);
       this.model.setLocalScale(scale, scale, scale);
 
       this._timer -= dt;

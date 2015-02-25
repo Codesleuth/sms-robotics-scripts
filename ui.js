@@ -57,8 +57,8 @@ pc.script.create('ui', function (app) {
   var instructions = [
       svgStart,
       '    <text class="ui-text outline-white" x="200" y="50" fill="purple" font-size="85" font-weight="bold">Esendex</text>',
-      '    <image x="200" y="150" width="360" height="89" xlink:href="', logoHref, '">',
-      //'    <text class="ui-text outline-black" x="200" y="150" fill="white" font-size="60" font-weight="bold">SMS Robotics</text>',
+      //'    <image x="200" y="150" width="360" height="89" xlink:href="', logoHref, '">',
+      '    <text class="ui-text outline-black" x="200" y="150" fill="white" font-size="60" font-weight="bold">SMS Robotics</text>',
       '    <text class="ui-text outline-black" x="1050" y="50" fill="white" font-size="60" font-weight="bold">Text &quot;JOIN&quot; to</text>',
       '    <text class="ui-text outline-black" x="1050" y="150" fill="white" font-size="60" font-weight="bold">07860026441</text>',
       svgEnd
